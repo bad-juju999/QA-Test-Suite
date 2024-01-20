@@ -5,7 +5,8 @@ import playwright, {
     BrowserContext,
     BrowserType,
     firefox
-    } from "playwright";
+} from "playwright";
+
 import { env } from "../../env/parseEnv";
 import { World, IWorldOptions, setWorldConstructor} from "@cucumber/cucumber";
 
@@ -16,7 +17,7 @@ export type Screen = {
     page: Page;
 }
 
-export class SceanarioWorld extends World {
+export class ScenarioWorld extends World {
     constructor(options: IWorldOptions) {
         super(options)
 
@@ -54,4 +55,4 @@ export class SceanarioWorld extends World {
     }
 }
 
-setWorldConstructor(SceanarioWorld)
+setWorldConstructor(ScenarioWorld)

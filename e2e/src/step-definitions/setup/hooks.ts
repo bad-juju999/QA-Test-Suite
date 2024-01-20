@@ -1,10 +1,8 @@
 import { Before, After, ITestCaseHookParameter} from "@cucumber/cucumber";
-//const { chromium } = require('playwright'); this was original n course but getting error on the require...
-import { SceanarioWorld } from "./world";
+import { ScenarioWorld } from "./world";
 
-Before(async function(this: SceanarioWorld, scenario) {
-
-    console.log(`running cucumber scenario ${scenario.pickle.name}`)
+Before(async function(this: ScenarioWorld, scenario) {
+    console.log(`Running cucumber scenario ${scenario.pickle.name}`)
 
     const contextOptions = {
         recordVideo: {
@@ -17,7 +15,7 @@ Before(async function(this: SceanarioWorld, scenario) {
     return ready
 });
 
-After(async function(this: SceanarioWorld, scenario) {
+After(async function(this: ScenarioWorld, scenario) {
     const {
         screen: { page, browser } 
     } = this;
