@@ -5,19 +5,25 @@
   "main": "index.js",
   "scripts": {
     "transpile": "rimraf dist && babel --extensions .ts --out-dir dist src",
-    "cucumber": "yarn transpile && cucumber-js"
+    "cucumber-compile": "yarn transpile && cucumber-js",
+    "precucumber": "rimraf reports && mkdir reports && echo {} > reports/report.json",
+    "cucumber": "yarn cucumber-compile",
+    "postcucumber": "ts-node ./src/reporter/cucumber-report.ts"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@babel/preset-typescript": "^7.23.3",
     "@cucumber/cucumber": "^10.0.1",
     "@playwright/test": "^1.40.1",
+    "dotenv": "^16.3.2",
     "playwright": "^1.40.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.3.3"
   },
   "dependencies": {
     "@babel/cli": "^7.23.4",
-    "@babel/preset-env": "^7.23.8"
+    "@babel/preset-env": "^7.23.8",
+    "cucumber-html-reporter": "^7.1.1"
   }
 }
