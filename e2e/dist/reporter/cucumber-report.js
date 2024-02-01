@@ -14,9 +14,6 @@ _dotenv.default.config({
 
 var options = {
   theme: 'bootstrap',
-  jsonFile: (0, _parseEnv.env)('JSON_REPORT_FILE'),
-  output: (0, _parseEnv.env)('HTML_REPORT_FILE'),
-  screenshotsDirectory: (0, _parseEnv.env)('SCREENSHOT_PATH'),
   storeScreenshots: true,
   reportSuiteAsScenarios: true,
   launchReport: false

@@ -1,16 +1,24 @@
 import { Given } from '@cucumber/cucumber'
 
-Given(
-    /^I am on the "([^"]*)" page$/,
-    async function(pageId: string) {
-        const {
-            screen: { page },
-        } = this;
+import {
+    navigateToPage,
+} from '../support/navigation-behavior';
+import { PageId } from '../env/global';
+ 
+ Given(
+     /^I am on the "([^"]*)" page$/,
+    async function(pageId: PageId) {
+         const {
+             screen: { page },
+            globalVariables,
+            globalConfig,
+         } = this;
+ 
+         console.log(`I am on the ${pageId} page`);
+ 
+        globalVariables.currentScreen = pageId;
 
-        console.log(`I am on the ${pageId} page`);
-
-        await page.goto("http://localhost:3000/")
-
-
-    }
-)
+        await navigateToPage(page, pageId, globalConfig);
+ 
+     }
+ )

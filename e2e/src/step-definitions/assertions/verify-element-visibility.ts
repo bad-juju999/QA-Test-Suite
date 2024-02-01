@@ -1,32 +1,25 @@
 import { Then } from '@cucumber/cucumber'
 import { expect } from '@playwright/test'
-
-Then(
-    /^the "([^"]*)" should contain the text "(.*)"$/,
-    async function(elementKey:string, expectedElementText: string){
-        const { screen: { page },
-        } = this;
-
-
-        console.log(`the ${elementKey} should contain the text ${expectedElementText}`)
-
-        const content = await page.textContent("[data-id='contacts']")
-
-        expect(content).toBe(expectedElementText)
-    }
-)
-
-Then(
-    /^the "([^]*)" should be displayed$/,
-    async function(elementKey:string) {
-        const { 
-            screen:{page},
-        } = this;
-        
+import { ElementKey } from '../../env/global';
+import { getElementLocator } from '../../support/web-element-helper';
+import { waitFor } from '../../support/wait-for-behavior';
+ 
+ Then(
+     /^the "([^"]*)" should be displayed$/,
+    async function(elementKey: ElementKey) {
+         const {
+             screen: { page },
+            globalVariables,
+            globalConfig,
+         } = this;
+ 
         console.log(`the ${elementKey} should be displayed`)
 
-        const locator = page.locator("[data-id='header-logo']")
-
-        await expect(locator).toBeVisible();
-    }
-)
+        const elementIdentifier = getElementLocator(page, elementKey, globalVariables, globalConfig);
+ 
+        await waitFor(async () => {
+            const isElementVisible = (await page.$(elementIdentifier)) != null;
+            return isElementVisible;
+        });
+     }
+ )

@@ -64,16 +64,20 @@ var ScenarioWorld = exports.ScenarioWorld = /*#__PURE__*/function (_World) {
 
     _this = _callSuper(this, ScenarioWorld, [options]);
 
+    _defineProperty(_assertThisInitialized(_this), "globalConfig", void 0);
+
+    _defineProperty(_assertThisInitialized(_this), "globalVariables", void 0);
+
     _defineProperty(_assertThisInitialized(_this), "screen", void 0);
 
     _defineProperty(_assertThisInitialized(_this), "newBrowser", /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-      var automationBrowsers, AutomationBrowser, browserType, browser;
+      var automationBrowsers, automationBrowser, browserType, browser;
       return regeneratorRuntime.wrap(function _callee$(_context) {
         while (1) switch (_context.prev = _context.next) {
           case 0:
             automationBrowsers = ['chromium', 'firefox', 'webkit'];
-            AutomationBrowser = (0, _parseEnv.env)('UI_AUTOMATION_BROWSER');
-            browserType = _playwright.default[AutomationBrowser];
+            automationBrowser = (0, _parseEnv.env)('UI_AUTOMATION_BROWSER');
+            browserType = _playwright.default[automationBrowser];
             _context.next = 5;
             return browserType.launch({
               headless: process.env.HEADLESS !== 'false',
@@ -91,6 +95,10 @@ var ScenarioWorld = exports.ScenarioWorld = /*#__PURE__*/function (_World) {
       }, _callee);
     })));
 
+    _this.globalConfig = options.parameters;
+    _this.globalVariables = {
+      currentScreen: ""
+    };
     return _this;
   }
 
