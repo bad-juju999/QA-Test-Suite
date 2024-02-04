@@ -1,6 +1,6 @@
-{
-    
+{     
 "cucumberautocomplete.steps": ["./e2e/src/step-definitions/**/*.ts"],     
-"cucumberautocomplete.syncfeatures": "./e2e/src/features/*.feature"
-
+"cucumberautocomplete.syncfeatures": ".C:/Coding/Automation Course/testing-talks-hub/react-app/e2e/src/features/*.feature", 
 }
+
+//"./e2e/src/step-definitions/**/*.ts"

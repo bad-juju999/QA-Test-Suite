@@ -1,0 +1,17 @@
+cd react-app
+npm start 
+cd e2e
+yarn cucumber:dev [or :smoke etc]
+
+
+*********************
+cd e2e
+set UI_AUTOMATION_BROWSER=chromium
+yarn cucumber --profile dev 
+^ this is now deprecated; do the below instead!
+
+cd e2e 
+.\run_tests.bat dev
+
+
+the config is a npm config... may be helpful in solving how to do script runner intelliJ thingy 

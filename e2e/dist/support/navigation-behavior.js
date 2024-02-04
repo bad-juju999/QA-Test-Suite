@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.navigateToPage = void 0;
+exports.navigateToPage = exports.getCurrentPageId = exports.currentPathMatchesPageId = void 0;
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
@@ -36,3 +36,41 @@ var navigateToPage = exports.navigateToPage = /*#__PURE__*/function () {
     return _ref2.apply(this, arguments);
   };
 }();
+
+var pathMatchesPageId = function pathMatchesPageId(path, pageId, _ref3) {
+  var pagesConfig = _ref3.pagesConfig;
+  var pageRegexString = pagesConfig[pageId].regex;
+  var pageRegex = new RegExp(pageRegexString);
+  return pageRegex.test(path);
+};
+
+var currentPathMatchesPageId = exports.currentPathMatchesPageId = function currentPathMatchesPageId(page, pageId, globalConfig) {
+  var _URL = new URL(page.url()),
+      currentPath = _URL.pathname;
+
+  console.log("currentPath ", currentPath);
+  return pathMatchesPageId(currentPath, pageId, globalConfig);
+};
+
+var getCurrentPageId = exports.getCurrentPageId = function getCurrentPageId(page, globalConfig) {
+  var pagesConfig = globalConfig.pagesConfig; //returns all page mappings from pages.JSON
+
+  console.log("pageConfig ", pagesConfig);
+  var pageConfigPageIds = Object.keys(pagesConfig);
+  console.log("pageConfigPageIds ", pageConfigPageIds);
+
+  var _URL2 = new URL(page.url()),
+      currentPath = _URL2.pathname; //grabbing url of page
+
+
+  var currentPageId = pageConfigPageIds.find(function (pageId) {
+    return pathMatchesPageId(currentPath, pageId, globalConfig);
+  });
+  console.log("currentPageId ", currentPageId);
+
+  if (!currentPageId) {
+    throw Error("Failed to get page name from current route ".concat(currentPath, ",             possible pages: ").concat(JSON.stringify(pagesConfig)));
+  }
+
+  return currentPageId;
+};

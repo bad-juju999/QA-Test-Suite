@@ -12,12 +12,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 (0, _cucumber.Then)(/^the "([^"]*)" should contain the text "(.*)"$/, /*#__PURE__*/function () {
   var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(elementKey, expectedElementText) {
-    var page, globalVariables, globalConfig, elementIdentifier;
+    var page, globalConfig, elementIdentifier;
     return regeneratorRuntime.wrap(function _callee2$(_context2) {
       while (1) switch (_context2.prev = _context2.next) {
         case 0:
-          page = this.screen.page, globalVariables = this.globalVariables, globalConfig = this.globalConfig;
-          elementIdentifier = (0, _webElementHelper.getElementLocator)(page, elementKey, globalVariables, globalConfig);
+          page = this.screen.page, globalConfig = this.globalConfig;
+          elementIdentifier = (0, _webElementHelper.getElementLocator)(page, elementKey, globalConfig);
           _context2.next = 4;
           return (0, _waitForBehavior.waitFor)( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
             var elementText;

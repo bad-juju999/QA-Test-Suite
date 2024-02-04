@@ -1,5 +1,5 @@
 import { Page } from 'playwright';
-import {GlobalConfig, GlobalVariables, PageId} from '../env/global';
+import {GlobalConfig, PageId} from '../env/global';
 
 export const navigateToPage = async (
     page: Page,
@@ -19,3 +19,54 @@ export const navigateToPage = async (
 
     await page.goto(url.href);
 };
+
+const pathMatchesPageId = (
+    path: string,
+    pageId: PageId,
+    { pagesConfig }: GlobalConfig 
+): boolean => {
+    const pageRegexString = pagesConfig[pageId].regex 
+    const pageRegex = new RegExp(pageRegexString)
+    return pageRegex.test(path)
+}
+
+export const currentPathMatchesPageId = (
+    page: Page,
+    pageId: PageId,
+    globalConfig: GlobalConfig,
+): boolean => {
+        const { pathname: currentPath } = new URL(page.url())
+        console.log("currentPath ", currentPath)
+        return pathMatchesPageId(currentPath, pageId, globalConfig)
+};
+
+export const getCurrentPageId = (
+    page:Page,
+    globalConfig: GlobalConfig,
+
+): PageId => {
+    
+    const { pagesConfig } = globalConfig; //returns all page mappings from pages.JSON
+
+    console.log("pageConfig ", pagesConfig)
+
+    const pageConfigPageIds= Object.keys(pagesConfig)
+
+    console.log("pageConfigPageIds ", pageConfigPageIds)
+
+    const { pathname: currentPath } = new URL(page.url()) //grabbing url of page
+
+    const currentPageId = pageConfigPageIds.find(pageId => 
+        pathMatchesPageId(currentPath, pageId, globalConfig)
+    );
+
+    console.log("currentPageId ", currentPageId)
+
+    if (!currentPageId) {
+        throw Error(
+            `Failed to get page name from current route ${currentPath}, \
+            possible pages: ${JSON.stringify((pagesConfig))}`
+        )
+    }
+    return currentPageId;
+}
