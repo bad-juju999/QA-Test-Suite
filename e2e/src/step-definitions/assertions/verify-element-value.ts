@@ -11,6 +11,8 @@ Then(
             globalConfig,
         } = this;
 
+        console.log(`the ${elementKey} should contain the ${expectedElementText}`)
+
         const elementIdentifier = getElementLocator(page, elementKey, globalConfig)
 
         await waitFor(async () => {
