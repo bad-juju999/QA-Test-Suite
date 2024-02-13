@@ -17,13 +17,13 @@ var navigateToPage = exports.navigateToPage = /*#__PURE__*/function () {
       while (1) switch (_context.prev = _context.next) {
         case 0:
           pagesConfig = _ref.pagesConfig, hostsConfig = _ref.hostsConfig;
-          _process$env$UI_AUTOM = process.env.UI_AUTOMATION_HOST, hostName = _process$env$UI_AUTOM === void 0 ? 'localhost' : _process$env$UI_AUTOM;
+          _process$env$UI_AUTOM = process.env.UI_AUTOMATION_HOST, hostName = _process$env$UI_AUTOM === void 0 ? 'production' : _process$env$UI_AUTOM;
           hostPath = hostsConfig["".concat(hostName)];
           url = new URL(hostPath);
           pageConfigItem = pagesConfig[pageId];
           url.pathname = pageConfigItem.route;
           _context.next = 8;
-          return page.goto(url.href);
+          return page["goto"](url.href);
 
         case 8:
         case "end":
