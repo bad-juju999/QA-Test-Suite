@@ -1,4 +1,4 @@
-<h1>AQA Test Suite</h1>
+<h1>QA Test Suite</h1>
 
  ### [YouTube Demonstration](https://www.youtube.com/)
 
